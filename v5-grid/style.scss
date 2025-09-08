@@ -1,0 +1,290 @@
+//sass --watch style.scss style.css
+$bg: #f1f1f1;
+$text: #0f1217;
+$brown: #f4a460;
+$grey: #e4e4e4;
+$darkgrey: #a9a9a9;
+$dimgray: #808080;
+$green: #228b22;
+$accent: #f2f6fa;
+$radius: 18px;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto,
+    'Helvetica Neue', Arial;
+  color: $text;
+  background: $bg;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px;
+  overflow: hidden;
+}
+
+.wrapper-item {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  &.wrapper-item-open {
+    transition: all 0.5s ease;
+  }
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 25px;
+  height: 220px;
+  position: relative;
+  background-color: $accent;
+  padding: 30px 30px;
+  border: 1px solid $dimgray;
+  overflow: hidden;
+  .btn-close {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    transition: all 0.3s ease;
+    visibility: hidden;
+    svg {
+      width: 20px;
+      fill: $darkgrey;
+      transition: all 0.3s ease;
+    }
+    &:hover {
+      svg {
+        fill: $text;
+      }
+    }
+  }
+  .wrap-icon-name {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    .name,
+    .name-is-open {
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+  .description {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+  .icon {
+    svg {
+      width: 50px;
+      height: 50px;
+      fill: $brown;
+      transition: all 0.9s ease;
+    }
+    &.icon-1 {
+      svg {
+        fill: $green;
+      }
+    }
+  }
+  .lists {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .name {
+        color: $darkgrey;
+      }
+      .icon-name {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        gap: 15px;
+        min-height: 30px;
+      }
+      .text {
+        font-size: 20px;
+        line-height: 130%;
+      }
+    }
+  }
+
+  .list-icon {
+    width: 20px;
+    fill: $darkgrey;
+  }
+  .btn-primary {
+    padding: 25px;
+    border: 1px solid transparent;
+    border-radius: 18px;
+    font-size: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    background-color: $accent;
+    overflow: hidden;
+    span {
+      opacity: 0;
+      visibility: hidden;
+      white-space: nowrap;
+    }
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: $dimgray;
+    }
+  }
+  .wrap-bottom {
+    width: 100%;
+  }
+  &:not(.is-open) {
+    max-width: 100%;
+    width: auto;
+    border-radius: 18px;
+    opacity: 1;
+    transition: all 0.5s ease;
+    .wrap-icon-name {
+      .name {
+        opacity: 1;
+        visibility: visible;
+        max-width: 158px;
+        transition: width 1s ease, opacity 2.9s ease, visibility 3s ease;
+      }
+      .name-is-open {
+        opacity: 0;
+        visibility: hidden;
+        max-width: 0;
+        max-height: 0;
+        transition: opacity 0.5s ease;
+      }
+    }
+    .description {
+      opacity: 0;
+      visibility: hidden;
+      max-width: 100%;
+      max-height: 0;
+      position: relative;
+      z-index: -1;
+      transition: opacity 0.2s ease, visibility 0.3s ease;
+    }
+    .btn-primary {
+      background-color: $accent;
+      transition: background-color 0.6s ease, border-color 0.6ms ease,
+        max-width 0.6ms ease;
+      span {
+        opacity: 0;
+        visibility: hidden;
+        white-space: nowrap;
+        transform: translate(12px, 12px);
+        transition: transform 0.4s ease, opacity 0.3s ease, visibility 0.5s ease;
+      }
+    }
+  }
+
+  &.is-open {
+    grid-column: 1 / -1;
+    max-height: 600px;
+    height: auto;
+    z-index: 2;
+    order: -1;
+    transition: all 0.8s ease;
+    border-radius: 12px;
+    .wrap-icon-name {
+      .name {
+        opacity: 0;
+        visibility: hidden;
+        max-width: 0;
+        max-height: 0;
+        transition: opacity 0.5s ease;
+      }
+      .name-is-open {
+        opacity: 1;
+        visibility: visible;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+    .description {
+      opacity: 1;
+      visibility: visible;
+      max-width: 982px;
+      width: 982px;
+      max-height: 100%;
+      transition: opacity 0.9s ease;
+    }
+
+    .icon {
+      svg {
+        width: 35px;
+        height: 35px;
+        transition: all 0.9s ease;
+      }
+    }
+    .btn-primary {
+      max-width: 100%;
+      background-color: $grey;
+      position: relative;
+      border: 1px solid $dimgray;
+      transition: background-color 0.9s ease, border-color 1.2s ease;
+      span {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(0px, 0px);
+        transition: all 1s ease;
+      }
+    }
+    .btn-close {
+      visibility: visible;
+    }
+  }
+}
+.cards-move {
+  transform: scale(0.95);
+  transform: translate(0, 0px);
+  opacity: 0.9;
+  transition: transform 0.7s ease, opacity 0.3s ease, width 0.3s ease,
+    height 0.5s ease;
+}
+.expand-enter-active,
+.expand-leave-active {
+  transition: opacity 1.9s ease;
+}
+
+.expand-enter,
+.expand-leave-to {
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .wrapper-item {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 576px) {
+  .wrapper-item {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
